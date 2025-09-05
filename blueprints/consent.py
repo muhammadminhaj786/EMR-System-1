@@ -21,14 +21,13 @@ def create_consent():
                 return jsonify({'error': f'{field} is required'}), 400
         
         # Create consent record
-        consent = Consent(
-            patient_name=data['patient_name'],
-            patient_email=data.get('patient_email'),
-            patient_phone=data.get('patient_phone'),
-            patient_fax=data.get('patient_fax'),
-            form_name=data['form_name'],
-            file_path=data['file_path']
-        )
+        consent = Consent()
+        consent.patient_name = data['patient_name']
+        consent.patient_email = data.get('patient_email')
+        consent.patient_phone = data.get('patient_phone')
+        consent.patient_fax = data.get('patient_fax')
+        consent.form_name = data['form_name']
+        consent.file_path = data['file_path']
         
         db.session.add(consent)
         db.session.commit()

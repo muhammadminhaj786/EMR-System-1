@@ -14,12 +14,11 @@ class ConsentService:
         """Send consent form to patient via specified method"""
         try:
             # Create transmission record
-            transmission = Transmission(
-                consent_id=consent.id,
-                method=method,
-                recipient=recipient,
-                status=TransmissionStatus.PENDING
-            )
+            transmission = Transmission()
+            transmission.consent_id = consent.id
+            transmission.method = method
+            transmission.recipient = recipient
+            transmission.status = TransmissionStatus.PENDING
             
             db.session.add(transmission)
             

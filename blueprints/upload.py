@@ -29,7 +29,7 @@ def upload_file():
             return jsonify({'error': 'Only PDF files are allowed'}), 400
         
         # Save the file
-        filename = secure_filename(file.filename)
+        filename = secure_filename(file.filename or '')
         file_path = FileService.save_upload(file, filename)
         
         logger.info(f"File uploaded successfully: {file_path}")

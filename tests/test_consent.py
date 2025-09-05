@@ -35,12 +35,11 @@ class ConsentTestCase(unittest.TestCase):
     def test_create_consent(self):
         """Test creating a new consent record."""
         with app.app_context():
-            consent = Consent(
-                patient_name="John Doe",
-                patient_email="john@example.com",
-                form_name="test_form.pdf",
-                file_path="/uploads/test_form.pdf"
-            )
+            consent = Consent()
+            consent.patient_name = "John Doe"
+            consent.patient_email = "john@example.com"
+            consent.form_name = "test_form.pdf"
+            consent.file_path = "/uploads/test_form.pdf"
             
             db.session.add(consent)
             db.session.commit()
@@ -54,12 +53,11 @@ class ConsentTestCase(unittest.TestCase):
         """Test sending a consent form."""
         with app.app_context():
             # Create a consent
-            consent = Consent(
-                patient_name="Jane Smith",
-                patient_email="jane@example.com",
-                form_name="consent_form.pdf",
-                file_path="/uploads/consent_form.pdf"
-            )
+            consent = Consent()
+            consent.patient_name = "Jane Smith"
+            consent.patient_email = "jane@example.com"
+            consent.form_name = "consent_form.pdf"
+            consent.file_path = "/uploads/consent_form.pdf"
             
             db.session.add(consent)
             db.session.commit()
