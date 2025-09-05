@@ -1,0 +1,99 @@
+🚀 Replit AI Prompt (Demo-Friendly Version)
+
+You are an expert full-stack developer skilled in Flask, jQuery, Bootstrap, and PostgreSQL.
+Generate a Consent & Intake Form Module (demo version) that works locally in Replit.
+
+🎯 Requirements
+Frontend (HTML + Bootstrap + jQuery)
+
+Drag-and-drop upload box (top-right corner) to upload PDF consent forms.
+
+On upload → send file to Flask backend via AJAX.
+
+Show fake PDF preview (use placeholder image).
+
+Send Modal
+
+Fields: Patient Name, Email, Phone, Fax, Delivery Method (Email / SMS / Fax).
+
+Submit via AJAX → backend just logs action and stores in DB.
+
+Tracking Tabs
+
+Outgoing → consents sent but not signed.
+
+Received → signed consents.
+
+Table shows: patient name, form, sent date, received date, status.
+
+History Table
+
+Shows all transmission attempts (method + timestamp).
+
+Backend (Flask)
+
+Blueprints for modular routes:
+
+/upload → save uploaded PDF to uploads/ folder (instead of AWS S3).
+
+/send → log transmission in DB (instead of AWS SES/Pinpoint/Fax).
+
+/track → fetch consents + history.
+
+/docuseal-callback → simulate signature completion.
+
+Database (SQLite for demo)
+
+Consent: patient name, contact info, form name, file path, status, timestamps.
+
+Transmission: method, recipient, status, timestamps (linked to Consent).
+
+Docuseal Mock
+
+Instead of real Docuseal, provide an endpoint /simulate-sign/<consent_id>
+
+When called → mark consent as signed, move from Outgoing → Received, and copy file to signed/ folder.
+
+Deliverables
+
+Flask backend (organized with blueprints/, models/, services/).
+
+Frontend (Bootstrap HTML + jQuery AJAX).
+
+SQLite models (SQLAlchemy).
+
+Simple README with run instructions.
+
+A flow-diagram.md file using Mermaid.js to illustrate:
+
+Upload flow (UI → Flask → local uploads/ + DB).
+
+Send flow (UI → Flask → log transmission).
+
+Signature flow (simulate via /simulate-sign → DB + move file → UI refresh).
+
+Constraints
+
+Keep code modular and clean.
+
+Use AJAX for backend calls.
+
+Store files locally (uploads/ and signed/) instead of AWS.
+
+Use SQLite instead of Postgres for demo.
+
+Provide at least 1–2 unit tests.
+
+💡 Please generate the full project codebase:
+
+Flask backend (blueprints, models, services).
+
+Frontend templates + static files.
+
+SQLite models.
+
+Mocked AWS + Docuseal.
+
+README + docs.
+
+✅ This should run locally in Replit with no AWS setup needed, but still follow the same architecture as the production design.
