@@ -1,0 +1,116 @@
+📋 Developer Assessment Task 
+CONSENT FORM AND INTAKE MODULE 
+ Status: Draft — Technical Assessment Document 
+ 
+🎯 Objective 
+Design and implement a Consent & Intake Form module within a medical EMR system. 
+This task is meant to assess the developer’s ability to: 
+●  Build responsive frontend interfaces using HTML, CSS (Bootstrap), and jQuery. 
+●  Write clean, modular, and well-documented backend code in Flask (Python). 
+●  Integrate with AWS services (S3, RDS, SES, Pinpoint) and a Humblefax as a fax provider. 
+●  Handle electronic signature flows with Docuseal. 
+●  Deliver a flow diagram to explain the architecture. 
+●  Apply error handling, security, and clean coding practices. 
+ 
+🖥 Functional Requirements 
+1.  Drag & Drop Upload 
+○  A drag-and-drop area must exist in the top-right corner. 
+○  Allows users to upload blank PDF consent forms. 
+○  Files are stored in AWS S3 and registered in the database. 
+ 
+2.  Consent Sending 
+○  Users can send a document by choosing one of three methods: SMS, Email, or Fax. 
+○  A popup modal appears when sending a consent, allowing entry of patient information and 
+delivery method selection. 
+ 
+3.  Consent Tracking 
+○  The bottom section of the UI must contain two tabs: 
+■  Outgoing → documents sent, awaiting signature. 
+■  Received → documents signed and returned. 
+ 
+○  Each tab shows a table with fields: 
+■  name 
+■  form 
+■  sent date 
+■  received date 
+■  status 
+ 
+■   
+4.  Electronic Signatures (Docuseal) 
+○  When a document is signed via Docuseal, its state must automatically update. 
+○  The document moves from Outgoing to Received. 
+○  The signed copy must be stored in S3. 
+ 
+5.  History of Actions 
+○  The system should maintain a complete record of all consent form transmissions (including 
+status). 
+○  This history should be displayed in a table. 
+ 
+⚙ Technical Guidelines 
+●  Frontend (HTML + CSS + jQuery) 
+○  Use Bootstrap for responsive layout. 
+○  Implement drag & drop with jQuery. 
+○  Use AJAX calls to communicate with the backend. 
+○  Implement table refresh and modal popup logic with jQuery. 
+○  PDF preview on hover (first page loaded from S3). 
+ 
+●  Backend (Flask) 
+○  Organize code into clean, modular services (e.g., separate S3, DB, messaging, Docuseal logic). 
+○  Handle uploads, sending, data fetching, and Docuseal callbacks. 
+○  Implement structured error handling and logging. 
+ 
+●  AWS Integration 
+○  S3 → store original and signed consent PDFs. 
+○  SES → send consents via email. 
+○  Pinpoint → send consents via SMS. 
+○  Fax provider → send consents via fax (must be HIPAA-compliant). 
+○  RDS (PostgreSQL) → store consent metadata and transmission history. 
+ 
+●  Database (flexible design) 
+○  Must support tracking of: 
+■  Consents (status, timestamps). 
+■  Transmission history (method, state). 
+ 
+○  The exact schema design is left to the developer, but it must cover the above needs and 
+follow relational best practices. 
+ 
+●  Docuseal Integration 
+○  Configure webhook/callback. 
+○  On signature completion: 
+■  Update status in DB. 
+■  Save final signed PDF in S3. 
+■  Refresh UI state (Outgoing → Received). 
+ 
+📊 Flow Diagram Requirement 
+The developer must provide a flow diagram showing at least: 
+1.  Upload flow → UI → Flask → S3 + DB. 
+2.  Send flow → UI → Flask → SES / Pinpoint / Fax → DB update. 
+3.  Signature flow → Docuseal → Callback → Flask → DB + S3 update → UI refresh. 
+The diagram can be delivered as PDF/PNG using tools like Lucidchart, Figma, or Mermaid.js. 
+ 
+󰳕 Coding Standards 
+●  Python/Flask 
+○  Clean, modular code. 
+○  Use environment variables for AWS credentials and DB connection. 
+ 
+●  JavaScript/jQuery 
+○  Avoid inline scripts. 
+○  Use event delegation for drag/drop and send actions. 
+○  Keep DOM updates clean and maintainable. 
+ 
+●  CSS/Bootstrap 
+○  Ensure tables are responsive. 
+○  Tabs should remain accessible and usable on both desktop and mobile. 
+ 
+✅ Deliverables 
+1.  Codebase 
+○  Flask backend (organized into services/blueprints). 
+○  HTML templates, JS (with jQuery), and CSS. 
+ 
+2.  Flow Diagram 
+○  High-level representation of upload, send, and signature workflows. 
+ 
+3.  README.md 
+○  Setup instructions (Flask + AWS + Docuseal). 
+○  Explanation of environment variables. 
+○  Developer’s design decisions (especially database structure). 
